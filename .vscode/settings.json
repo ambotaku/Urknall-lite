@@ -18,5 +18,5 @@
     },
     "cmake.buildBeforeRun": true,
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "cortex-debug.openocdPath": "/home/kzerbe/pico/openocd/src/openocd"
+    "cortex-debug.openocdPath": "/home/klauszerbe/projects/pico/openocd/src/openocd"
 }

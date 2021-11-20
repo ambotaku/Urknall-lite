@@ -22,7 +22,7 @@
                 "break main",
                 "continue"
             ],
-            "searchDir":["/home/kzerbe/pico/openocd/tcl"],
+            "searchDir":["/home/klauszerbe/projects/pico/openocd/tcl"],
         }
     ]
 }
