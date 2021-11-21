@@ -15,14 +15,28 @@ const uint RANDOM_SEED = 4711;      // start value for random pattern generator
 const uint PIXEL_DENSITY = 32;      // random value filter divisor
 
 unsigned long time = to_ms_since_boot(get_absolute_time());
-const int delayTime = 75;           // button debounce time in ms
+const int delayTime = 200;          // button debounce time in ms
 bool running = false;
+uint generation = 0;
+
+Habitat* pHabitat = NULL;
 
 void debounce_interrupt(uint gpio, uint32_t events) {
+    if (!pHabitat) return;
+
     if ((to_ms_since_boot(get_absolute_time())-time)>delayTime) {
         time = to_ms_since_boot(get_absolute_time());
         running = !running;
         gpio_put(LED_PIN, running);
+        if (!generation) {
+            pHabitat->clear();
+        }
+
+        if (running) {
+            ++generation;
+            pHabitat->nextGen(); // build next generation
+            pHabitat->display(); // and display it
+        }
     }
 }
 
@@ -43,6 +57,7 @@ int main() {
 
     // create instance of life generator
     Habitat habitat(0x3C, Size::W128xH64, i2c1);
+    pHabitat = &habitat;
 
     // show intro screen
     habitat.clear();
@@ -65,11 +80,7 @@ int main() {
 
     while(true) 
     {
-        sleep_ms(200);
-        if (running) {
-            habitat.nextGen(); // build next generation
-            habitat.display(); // and display it
-        }
+        sleep_ms(1000);
     }
     return 0;
 }
