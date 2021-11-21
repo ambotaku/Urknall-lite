@@ -2,7 +2,9 @@
 Conway's Game of Life on a Raspberry Pi Pico with Oled Display [Pi Pico SDK Demonstration in C++]
 
 This is mainly an example for using the Raspberry Pi Pico microcontroller with an attached SSD1306 controlled Oled-Display.
-As hardware only a Pi Pico and an Oled display with 128 x 64 pixels are needed, the software is based on the Pico SDK, anything else is part of the example.
+As hardware only a Pi Picom an Oled display with 128 x 64 pixels and a pushbutton are needed, the software is based on the Pico SDK, anything else is part of the example.
+
+Each click on the switch (attached to GPIO4) renders the next life generation to the oled display (attached to GPIO2 for SDA and GPIO3 for SCL of an i2C bus).
 
 The code renders stages of a cellular automaton known as "Conway's Game of Life" using pixels as "cells". Starting from a random pattern you will see establishing stable and moving / "living" structures based on very simple rules.
 
