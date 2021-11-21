@@ -26,7 +26,22 @@ public:
      */
     void nextGen();
 
+#ifdef EXPORT_GENERATION
+#include "base64.hpp"
+    /*
+     * export last rendered buffer as Base64 string
+     */
+    std::basic_string<unsigned char> exportGeneration() {
+      return base64::encode(readBuffer, bufferSize());
+    }
+#endif
+
 private:
+    // return buffersize needed
+    uint32_t bufferSize() {
+        return width * height / 8;
+    }
+
     // copy of current habitat for nondestructive analysis
 	unsigned char * readBuffer;
     uint generation; // generation counter

@@ -35,6 +35,10 @@ void debounce_interrupt(uint gpio, uint32_t events) {
         if (running) {
             ++generation;
             pHabitat->nextGen(); // build next generation
+#ifdef EXPORT_GENERATION
+            auto saved = pHabitat->exportGeneration();
+            printf("%s\n", saved.c_str());
+#endif
             pHabitat->display(); // and display it
         }
     }
